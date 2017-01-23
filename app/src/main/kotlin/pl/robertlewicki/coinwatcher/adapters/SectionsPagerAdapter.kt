@@ -5,13 +5,27 @@ import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import pl.robertlewicki.coinwatcher.fragments.CoinWatcherFragment
 import pl.robertlewicki.coinwatcher.fragments.CoinSelectedFragment
+import pl.robertlewicki.coinwatcher.models.Coin
 
 class SectionsPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
+    var allCoinsFragment: CoinWatcherFragment? = null
+    var selectedCoinsFragment: CoinSelectedFragment? = null
+
+    fun refresh() {
+
+    }
+
     override fun getItem(position: Int): Fragment? {
         when(position) {
-            0 -> return CoinWatcherFragment()
-            1 -> return CoinSelectedFragment()
+            0 -> {
+                allCoinsFragment = CoinWatcherFragment()
+                return allCoinsFragment
+            }
+            1 -> {
+                selectedCoinsFragment = CoinSelectedFragment()
+                return selectedCoinsFragment
+            }
         }
         return null
     }

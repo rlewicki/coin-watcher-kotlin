@@ -17,12 +17,13 @@ class MainActivity : AppCompatActivity(), UpdateCoinDataInterface {
 
     private val apiUrl = "https://api.coinmarketcap.com/v1/ticker/"
     private val apiUrlLimited = "https://api.coinmarketcap.com/v1/ticker/?limit=10"
+    private val pagerAdapter = SectionsPagerAdapter(supportFragmentManager)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-        container.adapter = SectionsPagerAdapter(supportFragmentManager)
+        container.adapter = pagerAdapter
         tabs.setupWithViewPager(container)
         RefreshCoinsData()
     }
@@ -42,7 +43,7 @@ class MainActivity : AppCompatActivity(), UpdateCoinDataInterface {
     }
 
     override fun UpdateData(data: MutableList<Coin>) {
-
+        pagerAdapter.refresh()
     }
 
     private fun RefreshCoinsData() {

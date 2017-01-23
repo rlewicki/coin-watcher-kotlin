@@ -9,7 +9,7 @@ import pl.robertlewicki.coinwatcher.models.Coin
 
 class JsonParser : AsyncTask<String, Void, String>() {
 
-    var delegate: UpdateCoinDataInterface = null!!
+    var delegate: UpdateCoinDataInterface? = null
 
     private val coins: MutableList<Coin> = mutableListOf()
 
@@ -35,6 +35,6 @@ class JsonParser : AsyncTask<String, Void, String>() {
         val mapper = ObjectMapper()
         val root = mapper.readTree(result)
         root.mapTo(coins) { mapper.readValue(it.toString(), Coin::class.java) }
-        delegate.UpdateData(coins)
+        delegate?.UpdateData(coins)
     }
 }

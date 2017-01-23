@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="50dp"
+              android:weightSum="100"
+              android:id="@+id/content">
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="70"
+            android:id="@+id/nameAndValue">
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:text="test"
+                android:textColor="#000000"
+                android:alpha="0.87"
+                android:gravity="bottom"
+                android:id="@+id/coinName"/>
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="18dp"
+                android:text="test"
+                android:textColor="#000000"
+                android:alpha="0.54"
+                android:gravity="top"
+                android:id="@+id/coinDollarValue"/>
+    </LinearLayout>
+
+    <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="30"
+            android:text="test"
+            android:gravity="center"
+            android:id="@+id/coinPercentChange"/>
+
+</LinearLayout>
