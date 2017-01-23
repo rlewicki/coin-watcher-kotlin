@@ -3,15 +3,15 @@ package pl.robertlewicki.coinwatcher.adapters
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
-import pl.robertlewicki.coinwatcher.fragments.CoinWatcher
-import pl.robertlewicki.coinwatcher.fragments.CoinWatcherSelected
+import pl.robertlewicki.coinwatcher.fragments.CoinWatcherFragment
+import pl.robertlewicki.coinwatcher.fragments.CoinSelectedFragment
 
 class SectionsPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
     override fun getItem(position: Int): Fragment? {
         when(position) {
-            0 -> return CoinWatcher()
-            1 -> return CoinWatcherSelected()
+            0 -> return CoinWatcherFragment()
+            1 -> return CoinSelectedFragment()
         }
         return null
     }

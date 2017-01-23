@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import pl.robertlewicki.coinwatcher.R
 
-class CoinWatcherSelected : Fragment() {
+class CoinSelectedFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater!!.inflate(R.layout.fragment_coin_selected, container, false)
         return rootView

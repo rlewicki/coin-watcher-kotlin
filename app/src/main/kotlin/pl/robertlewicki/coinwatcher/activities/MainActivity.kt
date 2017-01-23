@@ -9,16 +9,22 @@ import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_main.*
 import pl.robertlewicki.coinwatcher.R
 import pl.robertlewicki.coinwatcher.adapters.SectionsPagerAdapter
+import pl.robertlewicki.coinwatcher.interfaces.UpdateCoinDataInterface
+import pl.robertlewicki.coinwatcher.models.Coin
+import pl.robertlewicki.coinwatcher.utils.JsonParser
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), UpdateCoinDataInterface {
+
+    private val apiUrl = "https://api.coinmarketcap.com/v1/ticker/"
+    private val apiUrlLimited = "https://api.coinmarketcap.com/v1/ticker/?limit=10"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-        val sectionsPagerAdapter = SectionsPagerAdapter(supportFragmentManager)
-        container.adapter = sectionsPagerAdapter
+        container.adapter = SectionsPagerAdapter(supportFragmentManager)
         tabs.setupWithViewPager(container)
+        RefreshCoinsData()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -33,5 +39,15 @@ class MainActivity : AppCompatActivity() {
             R.id.action_search -> return true
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun UpdateData(data: MutableList<Coin>) {
+
+    }
+
+    private fun RefreshCoinsData() {
+        val json: JsonParser = JsonParser()
+        json.delegate = this
+        json.execute(apiUrl)
     }
 }
