@@ -9,23 +9,17 @@ import pl.robertlewicki.coinwatcher.models.Coin
 
 class SectionsPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
-    var allCoinsFragment: CoinWatcherFragment? = null
-    var selectedCoinsFragment: CoinSelectedFragment? = null
+    var allCoinsFragment = CoinWatcherFragment()
+    var selectedCoinsFragment = CoinSelectedFragment()
 
     fun refresh(data: MutableList<Coin>) {
-        allCoinsFragment?.refreshView(data)
+        allCoinsFragment.refreshView(data)
     }
 
     override fun getItem(position: Int): Fragment? {
         when(position) {
-            0 -> {
-                allCoinsFragment = CoinWatcherFragment()
-                return allCoinsFragment
-            }
-            1 -> {
-                selectedCoinsFragment = CoinSelectedFragment()
-                return selectedCoinsFragment
-            }
+            0 -> return allCoinsFragment
+            1 -> return selectedCoinsFragment
         }
         return null
     }

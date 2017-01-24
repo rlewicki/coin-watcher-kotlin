@@ -7,11 +7,9 @@ import cz.msebera.android.httpclient.impl.client.HttpClients
 import pl.robertlewicki.coinwatcher.interfaces.UpdateCoinDataInterface
 import pl.robertlewicki.coinwatcher.models.Coin
 
-class JsonParser : AsyncTask<String, Void, String>() {
+class JsonParser constructor(private var delegate: UpdateCoinDataInterface) : AsyncTask<String, Void, String>() {
 
-    var delegate: UpdateCoinDataInterface? = null
-
-    private val coins: MutableList<Coin> = mutableListOf()
+    private var coins = mutableListOf<Coin>()
 
     override fun onPreExecute() {
         super.onPreExecute()
@@ -24,7 +22,8 @@ class JsonParser : AsyncTask<String, Void, String>() {
         val httpGetRequest = HttpGet(urls[0])
         val httpResponse = httpClient.execute(httpGetRequest)
         val httpEntity = httpResponse.entity
-        return httpEntity.content.bufferedReader().use {it.readText()}
+        val result = httpEntity.content.bufferedReader().use {it.readText()}
+        return result
     }
 
     override fun onProgressUpdate(vararg progress: Void) {
@@ -35,6 +34,6 @@ class JsonParser : AsyncTask<String, Void, String>() {
         val mapper = ObjectMapper()
         val root = mapper.readTree(result)
         root.mapTo(coins) { mapper.readValue(it.toString(), Coin::class.java) }
-        delegate?.updateData(coins)
+        delegate.updateData(coins)
     }
 }

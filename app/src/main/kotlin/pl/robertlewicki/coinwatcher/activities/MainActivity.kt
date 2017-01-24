@@ -47,8 +47,7 @@ class MainActivity : AppCompatActivity(), UpdateCoinDataInterface {
     }
 
     private fun refreshCoinsData() {
-        val json: JsonParser = JsonParser()
-        json.delegate = this
+        val json = JsonParser(this)
         json.execute(apiUrl)
     }
 }

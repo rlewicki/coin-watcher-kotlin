@@ -11,7 +11,7 @@ import pl.robertlewicki.coinwatcher.R
 
 import kotlinx.android.synthetic.main.adapter_row.view.*
 
-class RowAdapter constructor(private var data:MutableList<Coin>, context: Context): BaseAdapter() {
+class RowAdapter constructor(private var data: MutableList<Coin>, context: Context): BaseAdapter() {
 
     private var layoutInflater: LayoutInflater = LayoutInflater.from(context)
 
@@ -29,7 +29,7 @@ class RowAdapter constructor(private var data:MutableList<Coin>, context: Contex
 
     override fun getView(i: Int, view: View?, viewGroup: ViewGroup?): View? {
         var newView = view
-        if(newView != null) {
+        if(newView == null) {
             newView = layoutInflater.inflate(R.layout.adapter_row, viewGroup, false)
         }
 
