@@ -34,8 +34,8 @@ class RowAdapter constructor(private var data: MutableList<Coin>, context: Conte
         }
 
         newView?.coinName?.text = data[i].currencyName
-        newView?.coinDollarValue?.text = data[i].priceUsd
-        newView?.coinPercentChange?.text = data[i].dailyPercentChange.toString()
+        newView?.coinDollarValue?.text = ("$" + data[i].priceUsd)
+        newView?.coinPercentChange?.text = (data[i].dailyPercentChange.toString() + "%")
 
         return newView
     }

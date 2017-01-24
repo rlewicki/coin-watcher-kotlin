@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="horizontal"
               android:layout_width="match_parent"
-              android:layout_height="50dp"
+              android:layout_height="52dp"
               android:weightSum="100"
               android:id="@+id/content">
 
@@ -25,10 +25,11 @@
                 android:id="@+id/coinName"/>
         <TextView
                 android:layout_width="match_parent"
-                android:layout_height="18dp"
+                android:layout_height="20dp"
                 android:paddingTop="2dp"
                 android:text="@string/test"
                 android:textColor="#000000"
+                android:textSize="12sp"
                 android:alpha="0.54"
                 android:gravity="top"
                 android:id="@+id/coinDollarValue"/>
