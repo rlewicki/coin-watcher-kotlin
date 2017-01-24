@@ -16,7 +16,7 @@ import pl.robertlewicki.coinwatcher.utils.JsonParser
 class MainActivity : AppCompatActivity(), UpdateCoinDataInterface {
 
     private val apiUrl = "https://api.coinmarketcap.com/v1/ticker/"
-    private val apiUrlLimited = "https://api.coinmarketcap.com/v1/ticker/?limit=10"
+    private val apiUrlLimited = "https://api.coinmarketcap.com/v1/ticker/?limit=100"
     private val pagerAdapter = SectionsPagerAdapter(supportFragmentManager)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,6 +48,6 @@ class MainActivity : AppCompatActivity(), UpdateCoinDataInterface {
 
     private fun refreshCoinsData() {
         val json = JsonParser(this)
-        json.execute(apiUrl)
+        json.execute(apiUrlLimited)
     }
 }
