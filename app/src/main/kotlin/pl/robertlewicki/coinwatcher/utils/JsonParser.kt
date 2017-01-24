@@ -35,6 +35,6 @@ class JsonParser : AsyncTask<String, Void, String>() {
         val mapper = ObjectMapper()
         val root = mapper.readTree(result)
         root.mapTo(coins) { mapper.readValue(it.toString(), Coin::class.java) }
-        delegate?.UpdateData(coins)
+        delegate?.updateData(coins)
     }
 }

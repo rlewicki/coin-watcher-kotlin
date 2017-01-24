@@ -12,8 +12,8 @@ class SectionsPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
     var allCoinsFragment: CoinWatcherFragment? = null
     var selectedCoinsFragment: CoinSelectedFragment? = null
 
-    fun refresh() {
-
+    fun refresh(data: MutableList<Coin>) {
+        allCoinsFragment?.refreshView(data)
     }
 
     override fun getItem(position: Int): Fragment? {

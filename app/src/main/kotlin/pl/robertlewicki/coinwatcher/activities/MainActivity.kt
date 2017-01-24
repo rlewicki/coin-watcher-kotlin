@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity(), UpdateCoinDataInterface {
         setSupportActionBar(toolbar)
         container.adapter = pagerAdapter
         tabs.setupWithViewPager(container)
-        RefreshCoinsData()
+        refreshCoinsData()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -42,11 +42,11 @@ class MainActivity : AppCompatActivity(), UpdateCoinDataInterface {
         return super.onOptionsItemSelected(item)
     }
 
-    override fun UpdateData(data: MutableList<Coin>) {
-        pagerAdapter.refresh()
+    override fun updateData(data: MutableList<Coin>) {
+        pagerAdapter.refresh(data)
     }
 
-    private fun RefreshCoinsData() {
+    private fun refreshCoinsData() {
         val json: JsonParser = JsonParser()
         json.delegate = this
         json.execute(apiUrl)
