@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="pl.robertlewicki.coinwatcher" >
+<manifest
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        package="pl.robertlewicki.coinwatcher" >
 
     <uses-permission android:name="android.permission.INTERNET"/>
 
@@ -16,10 +17,22 @@
             android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <meta-data
+                android:name="android.app.default_searchable"
+                android:value=".activities.SearchableActivity"/>
         </activity>
+        <activity
+                android:name=".activities.SearchableActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH"/>
+            </intent-filter>
+            <meta-data
+                    android:name="android.app.searchable"
+                    android:resource="@xml/searchable"/>
+        </activity>
+
     </application>
 
 </manifest>

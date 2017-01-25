@@ -3,6 +3,7 @@ package pl.robertlewicki.coinwatcher.activities
 import android.support.v7.app.AppCompatActivity
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 
@@ -37,7 +38,8 @@ class MainActivity : AppCompatActivity(), UpdateCoinDataInterface {
         val id = item.itemId
         when(id) {
             R.id.action_settings -> return true
-            R.id.action_search -> return true
+            R.id.action_search -> onSearchRequested()
+            R.id.action_refresh -> refreshCoinsData()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -47,6 +49,7 @@ class MainActivity : AppCompatActivity(), UpdateCoinDataInterface {
     }
 
     private fun refreshCoinsData() {
+        Log.d("debug", "Refreshing coins data.")
         val json = JsonParser(this)
         json.execute(apiUrl)
     }
