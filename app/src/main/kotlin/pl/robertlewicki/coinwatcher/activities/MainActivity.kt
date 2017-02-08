@@ -16,6 +16,7 @@ import pl.robertlewicki.coinwatcher.adapters.SectionsPagerAdapter
 import pl.robertlewicki.coinwatcher.interfaces.UpdateCoinDataInterface
 import pl.robertlewicki.coinwatcher.models.Coin
 import pl.robertlewicki.coinwatcher.utils.JsonParser
+import java.util.regex.Pattern
 
 class MainActivity : AppCompatActivity(), UpdateCoinDataInterface {
 
@@ -24,6 +25,7 @@ class MainActivity : AppCompatActivity(), UpdateCoinDataInterface {
     private val pagerAdapter = SectionsPagerAdapter(supportFragmentManager)
 
     private var searchView : SearchView? = null
+    private var coins : MutableList<Coin>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,13 +41,12 @@ class MainActivity : AppCompatActivity(), UpdateCoinDataInterface {
         val menuItem = menu.findItem(R.id.action_search)
         searchView = menuItem.actionView as SearchView
         searchView!!.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                Log.d("debug", "Submitting " + query)
+            override fun onQueryTextSubmit(query: String): Boolean {
+                queryCoins(query)
                 return true
             }
 
-            override fun onQueryTextChange(newText: String?): Boolean {
-                Log.d("debug", "String changed to " + newText)
+            override fun onQueryTextChange(newText: String): Boolean {
                 return true
             }
         })
@@ -63,6 +64,7 @@ class MainActivity : AppCompatActivity(), UpdateCoinDataInterface {
     }
 
     override fun updateData(data: MutableList<Coin>) {
+        coins = data
         pagerAdapter.refresh(data)
     }
 
@@ -70,5 +72,14 @@ class MainActivity : AppCompatActivity(), UpdateCoinDataInterface {
         Log.d("debug", "Refreshing coins data.")
         val json = JsonParser(this)
         json.execute(apiUrl)
+    }
+
+    private fun queryCoins(query: CharSequence) {
+        val queriedCoins: MutableList<Coin> = coins!!
+                .filter {
+                    it.currencyName!!.contains(query, true)
+                }
+                .toMutableList()
+        pagerAdapter.refresh(queriedCoins)
     }
 }
