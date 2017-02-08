@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity(), UpdateCoinDataInterface {
     private val apiUrlLimited = "https://api.coinmarketcap.com/v1/ticker/?limit=250"
     private val pagerAdapter = SectionsPagerAdapter(supportFragmentManager)
 
-    private var searchView : SearchView = null!!
+    private var searchView : SearchView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity(), UpdateCoinDataInterface {
         menuInflater.inflate(R.menu.menu_main, menu)
         val menuItem = menu.findItem(R.id.action_search)
         searchView = menuItem.actionView as SearchView
-        searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
+        searchView!!.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 Log.d("debug", "Submitting " + query)
                 return true
