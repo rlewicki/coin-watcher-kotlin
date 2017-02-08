@@ -1,11 +1,14 @@
 package pl.robertlewicki.coinwatcher.activities
 
+import android.app.SearchManager
+import android.content.Context
 import android.support.v7.app.AppCompatActivity
 
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.support.v7.widget.SearchView
 
 import kotlinx.android.synthetic.main.activity_main.*
 import pl.robertlewicki.coinwatcher.R
@@ -20,6 +23,8 @@ class MainActivity : AppCompatActivity(), UpdateCoinDataInterface {
     private val apiUrlLimited = "https://api.coinmarketcap.com/v1/ticker/?limit=250"
     private val pagerAdapter = SectionsPagerAdapter(supportFragmentManager)
 
+    private var searchView : SearchView = null!!
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -31,6 +36,19 @@ class MainActivity : AppCompatActivity(), UpdateCoinDataInterface {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
+        val menuItem = menu.findItem(R.id.action_search)
+        searchView = menuItem.actionView as SearchView
+        searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                Log.d("debug", "Submitting " + query)
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                Log.d("debug", "String changed to " + newText)
+                return true
+            }
+        })
         return true
     }
 
@@ -38,7 +56,7 @@ class MainActivity : AppCompatActivity(), UpdateCoinDataInterface {
         val id = item.itemId
         when(id) {
             R.id.action_settings -> return true
-            R.id.action_search -> onSearchRequested()
+            R.id.action_search -> return true
             R.id.action_refresh -> refreshCoinsData()
         }
         return super.onOptionsItemSelected(item)

@@ -9,6 +9,7 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:25.0.0'
     compile 'com.android.support:design:25.0.0'
+    compile 'com.android.support:support-core-ui:25.0.0'
     testCompile 'junit:junit:4.12'
     compile 'com.fasterxml.jackson.core:jackson-core:2.8.4'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.8.4'
