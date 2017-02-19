@@ -5,10 +5,14 @@ import android.content.Context
 import android.support.v7.app.AppCompatActivity
 
 import android.os.Bundle
+import android.os.IBinder
+import android.os.ParcelFileDescriptor
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.support.v7.widget.SearchView
+import android.view.inputmethod.InputMethodManager
+import android.widget.Filterable
 
 import kotlinx.android.synthetic.main.activity_main.*
 import pl.robertlewicki.coinwatcher.R
@@ -42,11 +46,15 @@ class MainActivity : AppCompatActivity(), UpdateCoinDataInterface {
         searchView = menuItem.actionView as SearchView
         searchView!!.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
+                val view = currentFocus
+                val inputManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                inputManager.hideSoftInputFromWindow(view.windowToken, 0)
                 queryCoins(query)
                 return true
             }
 
-            override fun onQueryTextChange(newText: String): Boolean {
+            override fun onQueryTextChange(query: String): Boolean {
+                queryCoins(query)
                 return true
             }
         })
